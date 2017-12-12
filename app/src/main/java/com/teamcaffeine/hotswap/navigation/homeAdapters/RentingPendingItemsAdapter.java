@@ -18,11 +18,13 @@ public class RentingPendingItemsAdapter extends BaseAdapter {
     private Context context;
     private HashMap<String, ActiveTransactionInfo> items;
     private ArrayList<ActiveTransactionInfo> itemList;
+    private String currentUserID;
 
-    public RentingPendingItemsAdapter(Context aContext) {
+    public RentingPendingItemsAdapter(Context aContext, String currentUserID) {
         context = aContext;
         items = new HashMap<>();
         itemList = new ArrayList<ActiveTransactionInfo> (items.values());
+        this.currentUserID = currentUserID;
     }
 
     public void putItems(HashMap<String, ActiveTransactionInfo> items) {
@@ -32,7 +34,7 @@ public class RentingPendingItemsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return items.size();
+        return itemList.size();
     }
 
     @Override
@@ -51,16 +53,24 @@ public class RentingPendingItemsAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.listview_row, parent, false);
+            row = inflater.inflate(R.layout.listview_renting_pending_row, parent, false);
         } else {
             row = convertView;
         }
 
-        TextView itemName = (TextView) row.findViewById(R.id.itemTitle);
-        TextView swapDates = (TextView) row.findViewById(R.id.itemDescription);
+        TextView itemName = (TextView) row.findViewById(R.id.txtItemName);
+        TextView swapDates = (TextView) row.findViewById(R.id.txtSwapDates);
+        TextView SwapInfo = (TextView) row.findViewById(R.id.txtSwapInfo);
 
         itemName.setText(itemList.get(position).getItem().getName());
         swapDates.setText(itemList.get(position).getDate().toString());
+
+        String ownerID = itemList.get(position).getItem().getOwnerID();
+        if (ownerID.equals(currentUserID)) {
+            SwapInfo.setText(context.getString(R.string.lending_to) + " " + itemList.get(position).getRenterId());
+        } else {
+            SwapInfo.setText(context.getString(R.string.renting_from) + " " + itemList.get(position).getItem().getOwnerID());
+        }
         return row;
     }
 

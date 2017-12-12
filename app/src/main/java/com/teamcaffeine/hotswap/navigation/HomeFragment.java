@@ -115,8 +115,8 @@ public class HomeFragment extends Fragment {
 
         // instantiate the list that wil hold all of the user's items
         ownedItemsAdapter = new OwnedItemsAdapter(getContext());
-        rentingAdapter = new RentingPendingItemsAdapter(getContext());
-        pendingAdapter = new RentingPendingItemsAdapter(getContext());
+        rentingAdapter = new RentingPendingItemsAdapter(getContext(), firebaseUser.getUid());
+        pendingAdapter = new RentingPendingItemsAdapter(getContext(), firebaseUser.getUid());
 
         // set tbe adapter on the listview in the UI
         listviewOwnedItems.setAdapter(ownedItemsAdapter);

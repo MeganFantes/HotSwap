@@ -16,8 +16,8 @@
         android:text="Dates" />
 
     <TextView
-        android:id="@+id/txtRentingFrom"
+        android:id="@+id/txtSwapInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Owner (Renting From)" />
+        android:text="Swapping Partner" />
 </LinearLayout>
