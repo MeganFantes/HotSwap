@@ -202,5 +202,7 @@
     <string name="copy">Copy</string>
     <string name="set_tags">Set Tags</string>
     <string name="distance_kilometers">Distance (Kilometers)</string>
+    <string name="lending_to">Lending to:</string>
+    <string name="renting_from">Renting from:</string>
 
 </resources>
